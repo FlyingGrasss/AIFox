@@ -1,21 +1,88 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --font-sans: var(--font-work-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-work-sans: var(--font-work-sans), ui-sans-serif, system-ui, sans-serif;
+
+  --color-primary: #8b5cf6;
+  /* Violet 500 */
+  --color-primary-foreground: #ffffff;
+
+  --color-secondary: #f5f3ff;
+  /* Violet 50 */
+  --color-secondary-foreground: #4c1d95;
+
+  --color-black: #1e1b4b;
+  --color-black-100: #4c1d95;
+  --color-black-200: #0f172a;
+  --color-black-300: #a78bfa;
+
+  --color-white: #ffffff;
+  --color-white-100: #f8fafc;
+
+  --radius-lg: 12px;
+  --radius-md: 10px;
+  --radius-sm: 8px;
+
+  --shadow-100: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-200: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-300: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer utilities {
+
+  /* Common UI Patterns */
+  .heading {
+    @apply text-white! font-extrabold sm:text-[54px] sm:leading-[64px] text-[30px] leading-[38px] max-w-5xl text-center my-5 tracking-tight;
   }
+
+  .pink_container {
+    @apply w-full flex justify-center items-center flex-col py-24 bg-slate-900 shadow-inner border-b border-white/5;
+  }
+
+  .section_container {
+    @apply px-6 py-10 max-w-7xl mx-auto;
+  }
+
+  .search-form {
+    @apply max-w-3xl w-full min-h-[64px] max-sm:w-auto bg-white border border-slate-200 rounded-full text-[20px] px-6 flex flex-row items-center gap-4 shadow-xl focus-within:ring-4 focus-within:ring-indigo-500/10 transition-all;
+  }
+
+  .search-input {
+    @apply flex-1 font-medium placeholder:text-slate-400 w-full h-auto outline-none text-slate-900 bg-transparent;
+  }
+
+  .search-btn {
+    @apply size-[44px] rounded-full bg-indigo-600 text-white flex justify-center items-center cursor-pointer hover:bg-indigo-500 transition-all shadow-lg active:scale-90;
+  }
+
+  .card_grid {
+    @apply grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-8 mt-10;
+  }
+
+  .text-30-bold {
+    @apply text-[30px] font-bold text-slate-900;
+  }
+
+  .no-result {
+    @apply text-slate-500 font-medium text-center py-20 bg-slate-100 rounded-[32px] border border-dashed border-slate-300;
+  }
+
+  .startup-card_skeleton {
+    @apply w-full h-80 rounded-[32px] bg-slate-200 animate-pulse;
+  }
+
+  /* Components are now mostly direct Tailwind */
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  @apply bg-slate-50 text-slate-900 font-sans selection:bg-indigo-500/20 antialiased;
+}
+
+.w-md-editor-toolbar {
+  @apply !p-4 border-b border-slate-200 bg-slate-50/50 backdrop-blur-sm;
+}
+
+.w-md-editor {
+  @apply border border-slate-200 !rounded-[24px] overflow-hidden !shadow-none bg-white;
 }
