@@ -11,6 +11,8 @@ import UpvoteButton from "@/components/UpvoteButton";
 import CommentSection from "@/components/CommentSection";
 import { auth } from "@/auth";
 import ProjectContent from "@/components/ProjectContent";
+import { PROJECT_BY_ID_QUERYResult } from "@/sanity/types";
+import { Session } from "next-auth";
 
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   return (
@@ -89,7 +91,7 @@ const ProjectPageContent = async ({ params }: { params: Promise<{ id: string }> 
   );
 };
 
-const Comments = async ({ id, initialComments, user }: { id: string; initialComments: any[]; user?: any }) => {
+const Comments = async ({ id, initialComments, user }: { id: string; initialComments: NonNullable<PROJECT_BY_ID_QUERYResult>['comments']; user?: Session['user'] }) => {
   return (
     <CommentSection
       projectId={id}

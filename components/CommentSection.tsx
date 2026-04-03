@@ -6,16 +6,9 @@ import { createComment, deleteComment } from "@/lib/actions";
 import { formatDate } from "@/lib/utils";
 import { Send, Trash2 } from "lucide-react";
 
-interface Comment {
-  _id: string;
-  text: string;
-  _createdAt: string;
-  author: {
-    _id: string;
-    name: string;
-    image: string;
-  };
-}
+import { PROJECT_BY_ID_QUERYResult } from "@/sanity/types";
+
+type Comment = NonNullable<PROJECT_BY_ID_QUERYResult>['comments'][number];
 
 const CommentSection = ({ 
   projectId, 
@@ -94,7 +87,7 @@ const CommentSection = ({
             <div className="flex-1 bg-white border border-slate-100 rounded-[24px] p-6 shadow-sm">
               <div className="flex justify-between items-start mb-4">
                 <div className="flex flex-col">
-                  <span className="font-bold text-[15px] text-slate-900">{comment.author?.name}</span>
+                  <span className="font-bold text-[15px] text-slate-900">{comment.author?.name || "Anonymous"}</span>
                   <span className="text-xs font-semibold text-slate-400">{formatDate(comment._createdAt)}</span>
                 </div>
                 {user?.id === comment.author?._id && (
@@ -109,7 +102,7 @@ const CommentSection = ({
                 )}
               </div>
               <p className="text-[15px] text-slate-600 leading-relaxed whitespace-pre-wrap">
-                {comment.text}
+                {comment.text || ""}
               </p>
             </div>
           </div>

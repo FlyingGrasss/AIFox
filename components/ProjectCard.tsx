@@ -5,7 +5,17 @@ import React from "react";
 import Link from "next/link";
 import { Author, Project } from "@/sanity/types";
 
-export type ProjectTypeCard = Omit<Project, "author"> & { author?: Author };
+export type ProjectTypeCard = {
+  _id: string;
+  _createdAt: string;
+  views: number | null;
+  description: string | null;
+  author: { _id: string; name: string | null; image: string | null; bio?: string | null } | null;
+  image: string | null;
+  title: string | null;
+  category: string | null;
+  githubUrl: string | null;
+};
 
 const ProjectCard = ({ post }: { post: ProjectTypeCard }) => {
   const { _createdAt, views, description, author, image, title, category, _id, githubUrl } = post;

@@ -8,8 +8,10 @@ import { formatDate } from "@/lib/utils";
 import { deleteProject } from "@/lib/actions";
 import { useRouter } from "next/navigation";
 
+import { PROJECT_BY_ID_QUERYResult } from "@/sanity/types";
+
 interface Props {
-  post: any;
+  post: NonNullable<PROJECT_BY_ID_QUERYResult>;
   userId?: string;
 }
 
@@ -30,7 +32,7 @@ const ProjectContent = ({ post, userId }: Props) => {
 
   return (
     <>
-      <section className="pink_container !min-h-[300px]">
+      <section className="pink_container min-h-[300px]!">
         <div className="flex flex-col items-center gap-6">
           <p className="bg-white/20 text-white px-4 py-1.5 font-bold rounded-full uppercase text-xs tracking-wider">
             {formatDate(post?._createdAt)}

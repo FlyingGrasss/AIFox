@@ -7,7 +7,7 @@ import slugify from "slugify";
 import { writeClient } from "@/sanity/lib/write-client";
 import { revalidatePath } from "next/cache";
 
-export const createProject = async (state: any, form: FormData, pitch: string, techStack: string[]) => {
+export const createProject = async (state: unknown, form: FormData, pitch: string, techStack: string[]) => {
   const session = await auth();
 
   if (!session) {
@@ -75,7 +75,7 @@ export const createProject = async (state: any, form: FormData, pitch: string, t
   }
 };
 
-export const updateProject = async (id: string, prevState: any, formData: FormData, pitch: string, techStack: string[]) => {
+export const updateProject = async (id: string, prevState: unknown, formData: FormData, pitch: string, techStack: string[]) => {
   const session = await auth();
   if (!session) return parseServerActionResponse({ error: "Not signed in", status: "ERROR" });
 

@@ -1,11 +1,10 @@
-// auth.ts
-import NextAuth from "next-auth";
+import NextAuth, { type NextAuthConfig } from "next-auth";
 import Google from "next-auth/providers/google";
 import { client } from "./sanity/lib/client";
 import { AUTHOR_BY_ID_QUERY } from "./sanity/lib/queries";
 import { writeClient } from "./sanity/lib/write-client";
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
+export const authConfig = {
   providers: [Google],
   callbacks: {
     async signIn({ user, profile }) {
@@ -68,4 +67,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
     },
   },
-});
+} satisfies NextAuthConfig;
+
+export const { handlers, signIn, signOut, auth } = NextAuth(authConfig);

@@ -24,6 +24,13 @@ interface Props {
   };
 }
 
+interface FormState {
+  status: string;
+  error: string;
+  values?: Record<string, any>;
+  _id?: string;
+}
+
 const ProjectForm = ({ initialData }: Props) => {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [pitch, setPitch] = useState(initialData?.pitch || "");
@@ -31,7 +38,7 @@ const ProjectForm = ({ initialData }: Props) => {
   const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
 
-  const handleFormSubmit = async (prevState: any, formData: FormData) => {
+  const handleFormSubmit = async (prevState: FormState, formData: FormData): Promise<FormState> => {
     try {
       const formValues = {
         title: formData.get("title") as string,
